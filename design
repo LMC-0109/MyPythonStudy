@@ -10,17 +10,30 @@
 选作：一元方程求解（热力学）
 '''
 
-#选择部分
-#计算部分
 from sympy import *
 from sympy.abc import T
 import numpy as np
 import matplotlib.pyplot as plt
-#比作部分——图形界面
-class Interface:
+from easygui import *
+import pygame as pg
+import time
+class INTERFACE:
+    t1 = time.perf_counter()
+    pg.mixer.init()
+    track = pg.mixer.music.load(r"C:\Users\李明澈\Music\罗之豪 - 体面 (男声版).mp3")
+    pg.mixer.music.play()
+    buttonbox(msg="姓名:蔡旭坤\n学号:8202181024\n学院:化学化工学院\n班级:化学生物环境类1810",
+              title="基本资料", choices=["详细资料", "关闭"], image="111.gif")
+    while ccbox(msg="性别:男\n出生年月日:2000/01/09\n星座:摩羯座\n爱好:唱 跳 rap 篮球",
+                title="详细资料", choices=["返回", "关闭"], image="222.gif"):
+        if ccbox(msg="姓名:蔡旭坤\n学号:8202181024\n学院:化学化工学院",
+                 title="基本资料", choices=["详细资料", "关闭"], image="111.gif"):
+            continue
+        else:
+            break
 
-#选作部分——求解一元方程并显示图像
-class Picture:
+
+class Picture:#选作部分——求解一元方程并显示图像
     # 公式
     def function(x):
         Cp = 0.99403 * +1.671 * pow(10, -4) * x + \
@@ -40,6 +53,7 @@ class Picture:
     x = np.linspace(0, 5000, 5000)
     y = function(x)
     plt.plot(x, y, color="red", linewidth=1)
+    #标记虚线
     plt.vlines(1200, 0, function(1200), color="blue", linewidth=0.5, linestyle="--")
     plt.hlines(function(1200), 0, 1200, color="blue", linewidth=0.5, linestyle="--")
     plt.axis()
@@ -49,40 +63,13 @@ class Picture:
     plt.ylabel('Cp/(KJ/(Kg K))')
     plt.scatter(1200,function(1200),s=10,color="black")#标记点
     plt.annotate('(%d,%.4f)' % (1200,function(1200)), xy=(1200, function(1200)), xytext=(1000, function(1200)),
-                 va='bottom')#标记虚线
+                 va='bottom')
+    #标记虚线
     plt.hlines(1.1, 0, answer, color='green', linewidth=0.5, linestyle='--')
     plt.vlines(answer, 0, 1.1, color='green', linewidth=0.5, linestyle='--')
     plt.scatter(answer,1.1,s=10,color="black")#标记点
     plt.annotate('(%.4f,1.1)' % (answer), xy=(answer, 1.1), xytext=(3500, 1.1),
-                 va='bottom')#标记虚线
+                 va='bottom')
     plt.savefig("PYTHON.png", dpi=72)  # 以分辨率72保存图片，名为 PYTHON
     plt.show()  # 显示图片
-
-#流量
-class Q:
-    #V-X
-    x1 = np.array([0, 1.6, 4.1, 4.8, 6.1, 6.8, 9])
-    V = np.array([0, 0.08, 0.61, 0.68, 0.55, 0.42, 0])
-    #H-X
-    x2 = np.array([0, 1.1, 2.8, 4.6, 6, 8.1, 9])
-    H = np.array([0, 0.21, 0.78, 1.87, 1.44, 1.28, 0.2])
-    #三次项拟合
-    f1 = np.polyfit(x1, V, 3)
-    f2 = np.polyfit(x2, H, 3)
-    p1 = np.poly1d(f1)
-    p2 = np.poly1d(f2)
-    #计算流量
-    x = symbols('x')
-    s = integrate(p1(x) * p2(x), (x, 0, 9))
-    s = float(s)
-    # 函数图像
-    plt.plot(x1, V, color="red")
-    plt.plot(x2, H, color="blue")
-    plt.xlabel("x")
-    plt.ylabel('Q')
-    plt.annotate("Q=%.4f" % (z.s), xy=(5, 1), xytext=(5, 1), color="black")
-    # 保存
-    plt.savefig("Q.png", dpi=72)
-    # 显示
-    plt.show()
-
+pg.mixer.music.stop()

@@ -1,0 +1,28 @@
+import pygame as pg
+from easygui import *
+#音乐播放器
+pg.mixer.init()
+lit=["夜空中最亮的星","体面","刚好遇见你","关闭"]
+while 1:
+    a=indexbox(msg="您想听什么歌曲",title="您的专属播放器",choices=lit)
+    if a==0:
+        track = pg.mixer.music.load(r"C:\Users\李明澈\Music\逃跑计划 - 夜空中最亮的星.mp3")
+        pg.mixer.music.play()
+        if ccbox(msg="播放中",title="夜空中最亮的星",choices=["返回","关闭"]):
+            continue
+        else :break
+    elif a==1:
+        track = pg.mixer.music.load(r"C:\Users\李明澈\Music\罗之豪 - 体面 (男声版).mp3")
+        pg.mixer.music.play()
+        if ccbox(msg="播放中", title="体面", choices=["返回", "关闭"]):
+            continue
+        else:
+            break
+    elif a==2:
+        track = pg.mixer.music.load(r"C:\Users\李明澈\Music\排骨教主 - 刚好遇见你.mp3")
+        pg.mixer.music.play()
+        if ccbox(msg="播放中", title="刚好遇见你", choices=["返回", "关闭"]):
+            continue
+        else:
+            break
+    elif a==3:break

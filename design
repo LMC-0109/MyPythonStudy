@@ -56,20 +56,32 @@ class Picture:
                  va='bottom')#标记虚线
     plt.savefig("PYTHON.png", dpi=72)  # 以分辨率72保存图片，名为 PYTHON
     plt.show()  # 显示图片
-Picture()
-    #未完
+
+#流量
 class Q:
-    x1=np.array([0,1.6,4.1,4.8,6.1,6.8,9])
-    V=np.array([0,0.08,0.61,0.68,0.55,0.42,0])
-    x2=np.array([0,1.1,2.8,4.6,6,8.1,9])
-    H=np.array([0,0.21,0.78,1.87,1.44,1.28,0.2])
-    f1=np.polyfit(x1,V,3)
-    f2=np.polyfit(x2,H,3)
-    p1=np.poly1d(f1)
-    p2=np.poly1d(f2)
-    plt.plot(x1,V,color="red")
-    plt.plot(x2,H,color="blue")
+    #V-X
+    x1 = np.array([0, 1.6, 4.1, 4.8, 6.1, 6.8, 9])
+    V = np.array([0, 0.08, 0.61, 0.68, 0.55, 0.42, 0])
+    #H-X
+    x2 = np.array([0, 1.1, 2.8, 4.6, 6, 8.1, 9])
+    H = np.array([0, 0.21, 0.78, 1.87, 1.44, 1.28, 0.2])
+    #三次项拟合
+    f1 = np.polyfit(x1, V, 3)
+    f2 = np.polyfit(x2, H, 3)
+    p1 = np.poly1d(f1)
+    p2 = np.poly1d(f2)
+    #计算流量
+    x = symbols('x')
+    s = integrate(p1(x) * p2(x), (x, 0, 9))
+    s = float(s)
+    # 函数图像
+    plt.plot(x1, V, color="red")
+    plt.plot(x2, H, color="blue")
+    plt.xlabel("x")
+    plt.ylabel('Q')
+    plt.annotate("Q=%.4f" % (z.s), xy=(5, 1), xytext=(5, 1), color="black")
+    # 保存
+    plt.savefig("Q.png", dpi=72)
+    # 显示
     plt.show()
-    x=symbols('x')
-    s=integrate(p1(x)*p2(x),(x,0,9))
 

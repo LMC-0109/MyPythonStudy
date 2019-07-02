@@ -15,8 +15,7 @@ t = solve(0.99403 + 1.671 * pow(10, -4) * T + \
               1.9520 * pow(10, -14) * pow(T, 4) - 1.1, T)
 answer = t[1]
 cp=function(1200)
-#播放音乐
-pg.mixer.init()
+pg.mixer.init()#播放音乐
 track = pg.mixer.music.load(r"C:\Users\李明澈\Music\排骨教主 - 刚好遇见你.mp3")
 pg.mixer.music.play()
 s = """Cp=0.99403+1.671*pow(10,-4)*x+9.7215*pow(10,-8)*pow(x,2)-9.5838*pow(10,-11)*pow(x,3)+1.9520*pow(10,-14)*pow(x,4)"""
@@ -33,8 +32,7 @@ if ccbox(msg="姓名:李明澈\n学号:82021810824\n学校:中南大学",
         buttonbox(msg="公式为:" + s+"\nCp=1.1时,T=544.0875\nT=1200时,Cp=1.2094",
                   title="Cp-T图像", choices=["关闭"],
                       image="PYTHON.png")
-#音乐停止
-pg.mixer.music.stop()
+pg.mixer.music.stop()#音乐停止
 
 
 

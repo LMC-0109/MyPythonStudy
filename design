@@ -5,23 +5,43 @@ import matplotlib.pyplot as plt
 from easygui import *
 import pygame as pg
 import time
-#个人信息
-class INTERFACE:
-    pg.mixer.init()
-    track = pg.mixer.music.load(r"C:\Users\李明澈\Music\排骨教主 - 刚好遇见你.mp3")
-    pg.mixer.music.play()
-    if ccbox(msg="姓名:李明澈\n学号:8202181024\n学院:化学化工学院\n班级:化学生物环境类1810",
-              title="基本资料", choices=["详细资料", "关闭"], image="111.gif"):
-        while ccbox(msg="性别:男\n出生年月日:2000/01/09\n星座:摩羯座\n爱好:唱 跳 rap 篮球",
-                title="详细资料", choices=["返回", "关闭"], image="222.gif"):
-            if ccbox(msg="姓名:李明澈\n学号:8202181024\n学院:化学化工学院",
-                 title="基本资料", choices=["详细资料", "关闭"], image="111.gif"):
-                continue
-            else:
-                break
-#选择部分
-#计算部分
-class Picture:#选作部分——求解一元方程并显示图像
+#公式Cp-T
+def function(x):
+    Cp = 0.99403 + 1.671 * pow(10, -4) * x + \
+         9.7215 * pow(10, -8) * pow(x, 2) - 9.5838 * pow(10, -11) * pow(x, 3) + \
+         1.9520 * pow(10, -14) * pow(x, 4)
+t = solve(0.99403 + 1.671 * pow(10, -4) * T + \
+              9.7215 * pow(10, -8) * pow(T, 2) - 9.5838 * pow(10, -11) * pow(T, 3) + \
+              1.9520 * pow(10, -14) * pow(T, 4) - 1.1, T)
+answer = t[1]
+cp=function(1200)
+#播放音乐
+pg.mixer.init()
+track = pg.mixer.music.load(r"C:\Users\李明澈\Music\排骨教主 - 刚好遇见你.mp3")
+pg.mixer.music.play()
+s = """Cp=0.99403+1.671*pow(10,-4)*x+9.7215*pow(10,-8)*pow(x,2)-9.5838*pow(10,-11)*pow(x,3)+1.9520*pow(10,-14)*pow(x,4)"""
+if ccbox(msg="姓名:李明澈\n学号:82021810824\n学校:中南大学",
+             title="个人资料", choices=["详细资料", "关闭"], image="111.gif"):
+    while ccbox(msg="性别:男\n出生年月日:2000/01/09\n星座:摩羯座\n爱好:唱 跳 rap 篮球",
+                    title="详细资料", choices=["返回", "小程序"], image="222.gif"):
+        if ccbox(msg="姓名:李明澈\n学号:8202181024\n学院:化学化工学院",
+                     title="基本资料", choices=["详细资料", "关闭"], image="111.gif"):
+            continue
+        else:
+            break
+    else:
+        buttonbox(msg="公式为:" + s+"\nCp=1.1时,T=544.0875\nT=1200时,Cp=1.2094",
+                  title="Cp-T图像", choices=["关闭"],
+                      image="PYTHON.png")
+#音乐停止
+pg.mixer.music.stop()
+
+
+
+
+
+#//////////////////////////////////////////////////////////
+'''class Picture:#选作部分——求解一元方程并显示图像
     # 公式
     def function(x):
         Cp = 0.99403 +1.671 * pow(10, -4) * x + \
@@ -61,3 +81,4 @@ class Picture:#选作部分——求解一元方程并显示图像
     plt.savefig("PYTHON.png", dpi=72)  # 以分辨率72保存图片，名为 PYTHON
     plt.show()  # 显示图片
 pg.mixer.music.stop()
+'''

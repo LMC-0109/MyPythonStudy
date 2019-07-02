@@ -22,11 +22,11 @@ class INTERFACE:
     pg.mixer.init()
     track = pg.mixer.music.load(r"C:\Users\李明澈\Music\罗之豪 - 体面 (男声版).mp3")
     pg.mixer.music.play()
-    buttonbox(msg="姓名:蔡旭坤\n学号:8202181024\n学院:化学化工学院\n班级:化学生物环境类1810",
+    buttonbox(msg="姓名:李明澈\n学号:8202181024\n学院:化学化工学院\n班级:化学生物环境类1810",
               title="基本资料", choices=["详细资料", "关闭"], image="111.gif")
     while ccbox(msg="性别:男\n出生年月日:2000/01/09\n星座:摩羯座\n爱好:唱 跳 rap 篮球",
                 title="详细资料", choices=["返回", "关闭"], image="222.gif"):
-        if ccbox(msg="姓名:蔡旭坤\n学号:8202181024\n学院:化学化工学院",
+        if ccbox(msg="姓名:李明澈\n学号:8202181024\n学院:化学化工学院",
                  title="基本资料", choices=["详细资料", "关闭"], image="111.gif"):
             continue
         else:

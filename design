@@ -1,15 +1,3 @@
-'''
-内容简介
-
-大家好，我是cxk
-学号:8202181024
-学院:化学化工学院
-班级:化生环1810班
-我喜欢唱 跳 rap 篮球
-
-选作：一元方程求解（热力学）
-'''
-
 from sympy import *
 from sympy.abc import T
 import numpy as np
@@ -17,40 +5,40 @@ import matplotlib.pyplot as plt
 from easygui import *
 import pygame as pg
 import time
+#个人信息
 class INTERFACE:
-    t1 = time.perf_counter()
     pg.mixer.init()
-    track = pg.mixer.music.load(r"C:\Users\李明澈\Music\罗之豪 - 体面 (男声版).mp3")
+    track = pg.mixer.music.load(r"C:\Users\李明澈\Music\排骨教主 - 刚好遇见你.mp3")
     pg.mixer.music.play()
-    buttonbox(msg="姓名:李明澈\n学号:8202181024\n学院:化学化工学院\n班级:化学生物环境类1810",
-              title="基本资料", choices=["详细资料", "关闭"], image="111.gif")
-    while ccbox(msg="性别:男\n出生年月日:2000/01/09\n星座:摩羯座\n爱好:唱 跳 rap 篮球",
+    if ccbox(msg="姓名:李明澈\n学号:8202181024\n学院:化学化工学院\n班级:化学生物环境类1810",
+              title="基本资料", choices=["详细资料", "关闭"], image="111.gif"):
+        while ccbox(msg="性别:男\n出生年月日:2000/01/09\n星座:摩羯座\n爱好:唱 跳 rap 篮球",
                 title="详细资料", choices=["返回", "关闭"], image="222.gif"):
-        if ccbox(msg="姓名:李明澈\n学号:8202181024\n学院:化学化工学院",
+            if ccbox(msg="姓名:李明澈\n学号:8202181024\n学院:化学化工学院",
                  title="基本资料", choices=["详细资料", "关闭"], image="111.gif"):
-            continue
-        else:
-            break
-
-
+                continue
+            else:
+                break
+#选择部分
+#计算部分
 class Picture:#选作部分——求解一元方程并显示图像
     # 公式
     def function(x):
-        Cp = 0.99403 * +1.671 * pow(10, -4) * x + \
+        Cp = 0.99403 +1.671 * pow(10, -4) * x + \
              9.7215 * pow(10, -8) * pow(x, 2) - 9.5838 * pow(10, -11) * pow(x, 3) + \
              1.9520 * pow(10, -14) * pow(x, 4)
         return Cp
 
-    s = """Cp=0.99403*+1.671*pow(10,-4)*x+9.7215*pow(10,-8)*pow(x,2)-9.5838*pow(10,-11)*pow(x,3)+1.9520*pow(10,-14)*pow(x,4)"""
+    s = """Cp=0.99403+1.671*pow(10,-4)*x+9.7215*pow(10,-8)*pow(x,2)-9.5838*pow(10,-11)*pow(x,3)+1.9520*pow(10,-14)*pow(x,4)"""
     print("计算公式为:")
     print(s)
     # 求解Cp=1.1时的温度，结果为元组，四个解但只有第二个为正数
-    t = solve(0.99403 * +1.671 * pow(10, -4) * T + \
+    t = solve(0.99403 +1.671 * pow(10, -4) * T + \
               9.7215 * pow(10, -8) * pow(T, 2) - 9.5838 * pow(10, -11) * pow(T, 3) + \
               1.9520 * pow(10, -14) * pow(T, 4) - 1.1, T)
     answer = t[1]
     # 显示图像
-    x = np.linspace(0, 5000, 5000)
+    x = np.linspace(0, 1200, 1200)
     y = function(x)
     plt.plot(x, y, color="red", linewidth=1)
     #标记虚线
@@ -68,7 +56,7 @@ class Picture:#选作部分——求解一元方程并显示图像
     plt.hlines(1.1, 0, answer, color='green', linewidth=0.5, linestyle='--')
     plt.vlines(answer, 0, 1.1, color='green', linewidth=0.5, linestyle='--')
     plt.scatter(answer,1.1,s=10,color="black")#标记点
-    plt.annotate('(%.4f,1.1)' % (answer), xy=(answer, 1.1), xytext=(3500, 1.1),
+    plt.annotate('(%.4f,1.1)' % (answer), xy=(answer, 1.1), xytext=(answer, 1.1),
                  va='bottom')
     plt.savefig("PYTHON.png", dpi=72)  # 以分辨率72保存图片，名为 PYTHON
     plt.show()  # 显示图片
